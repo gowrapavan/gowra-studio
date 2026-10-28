@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(156,55%,30%)"/>
+      <stop offset="100%" stop-color="hsl(356,45%,20%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect x="0" y="0" width="267" height="300" fill="hsl(156,50%,50.92%)" opacity="0.6"/><rect x="0" y="300" width="267" height="300" fill="hsl(174,50%,46.04%)" opacity="0.6"/><rect x="267" y="0" width="267" height="300" fill="hsl(174,50%,46.04%)" opacity="0.6"/><rect x="267" y="300" width="267" height="300" fill="hsl(192,50%,41.16%)" opacity="0.6"/><rect x="533" y="0" width="267" height="300" fill="hsl(192,50%,41.16%)" opacity="0.6"/><rect x="533" y="300" width="267" height="300" fill="hsl(210,50%,36.28%)" opacity="0.6"/><rect x="800" y="0" width="267" height="300" fill="hsl(210,50%,36.28%)" opacity="0.6"/><rect x="800" y="300" width="267" height="300" fill="hsl(228,50%,51.4%)" opacity="0.6"/><rect x="1067" y="0" width="267" height="300" fill="hsl(228,50%,51.4%)" opacity="0.6"/><rect x="1067" y="300" width="267" height="300" fill="hsl(246,50%,46.519999999999996%)" opacity="0.6"/><rect x="1067" y="600" width="267" height="300" fill="hsl(264,50%,41.64%)" opacity="0.6"/><rect x="1333" y="0" width="267" height="300" fill="hsl(246,50%,46.519999999999996%)" opacity="0.6"/><rect x="1333" y="300" width="267" height="300" fill="hsl(264,50%,41.64%)" opacity="0.6"/><rect x="1333" y="600" width="267" height="300" fill="hsl(282,50%,36.76%)" opacity="0.6"/>
+</svg>

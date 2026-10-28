@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(73,55%,30%)"/>
+      <stop offset="100%" stop-color="hsl(273,45%,20%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <circle cx="1333" cy="478" r="245" fill="hsl(73,55%,45%)" opacity="0.55"/><circle cx="1194" cy="373" r="226" fill="hsl(95,55%,45%)" opacity="0.55"/><circle cx="1054" cy="269" r="207" fill="hsl(117,55%,45%)" opacity="0.55"/><circle cx="915" cy="164" r="188" fill="hsl(139,55%,45%)" opacity="0.55"/><circle cx="776" cy="60" r="168" fill="hsl(161,55%,45%)" opacity="0.55"/><circle cx="637" cy="1156" r="149" fill="hsl(183,55%,45%)" opacity="0.55"/><circle cx="498" cy="1051" r="130" fill="hsl(205,55%,45%)" opacity="0.55"/><circle cx="358" cy="947" r="111" fill="hsl(227,55%,45%)" opacity="0.55"/><circle cx="219" cy="842" r="312" fill="hsl(249,55%,45%)" opacity="0.55"/>
+</svg>

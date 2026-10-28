@@ -1,0 +1,657 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================================================================
+   DESIGN TOKENS
+   Every spacing, depth and type value in the product resolves to one
+   of these. Tailwind's spacing / fontSize / boxShadow scales are
+   remapped onto them in tailwind.config.ts, so a utility class can't
+   express a value that isn't declared here.
+   ================================================================== */
+
+:root {
+  /* --- Spacing ------------------------------------------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 40px;
+  --space-8: 48px;
+  --space-12: 64px;
+  --space-16: 80px;
+
+  /* Fixed sizes: same numbers as the spacing scale, but they never change.
+     Heights, widths and offsets use these (see tailwind.config.ts). */
+  --size-1: 8px;
+  --size-2: 16px;
+  --size-3: 24px;
+  --size-4: 32px;
+  --size-6: 40px;
+  --size-8: 48px;
+  --size-12: 64px;
+  --size-16: 80px;
+
+  /* --- Elevation ----------------------------------------------- *
+   * Three levels, nothing else. Most of the page is level 0.       */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Hard graphic offset used by .plate — not a shadow, a print mark. */
+  --offset-hard: 4px;
+
+  /* --- Type scale (modular, ratio 1.25) ------------------------ *
+   * Line heights are multiples of 4px so text lands on a baseline. */
+  --text-xs: 0.8rem;
+  --leading-xs: 1.5;
+  --text-sm: 0.95rem;
+  --leading-sm: 1.55;
+  --text-base: 1rem;
+  --text-input: 1rem; /* form fields never go below this on phones, or iOS zooms */
+  --leading-base: 1.6;
+  --text-lg: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  --leading-lg: 1.45;
+  --text-xl: clamp(1.15rem, 1.05rem + 0.6vw, 1.45rem);
+  --leading-xl: 1.35;
+  --text-2xl: clamp(1.3rem, 1.1rem + 1vw, 1.8rem);
+  --leading-2xl: 1.25;
+  --text-3xl: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem);
+  --leading-3xl: 1.15;
+  --text-4xl: clamp(1.75rem, 1.2rem + 2.2vw, 2.8rem);
+  --leading-4xl: 1.08;
+  --text-5xl: clamp(2rem, 1.3rem + 3vw, 3.4rem);
+  --leading-5xl: 1.04;
+  --text-6xl: clamp(2.25rem, 1.3rem + 4vw, 4rem);
+  --leading-6xl: 1;
+
+  /* --- Letter spacing ------------------------------------------ */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.12em;
+  --tracking-widest: 0.2em;
+  --tracking-ultra: 0.3em;
+
+  /* --- Brand ----------------------------------------------------- */
+  --whatsapp: #25d366;
+
+  /* --- Measure -------------------------------------------------- *
+   * Text column width is a typographic concern, expressed in
+   * characters — not another page-level max-width.                 */
+  --measure: 62ch;
+  --measure-narrow: 44ch;
+
+  /* --- Grid ------------------------------------------------------ *
+   * One max-width for the whole page; 12 columns; 24px gutters.     */
+  --container-max: 1360px;
+  --grid-gutter: var(--space-3);
+
+  /* --- Composition ---------------------------------------------- */
+  --hero-min: 560px;
+  --rail-card: 26rem;
+  --rail-card-sm: 60vw;
+
+  /* --- Device safe areas ------------------------------------------ *
+   * The only place env() is called; everything else references this. */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+
+  /* --- Texture --------------------------------------------------- *
+   * Fractal noise at ~5% alpha, tiled. Baked into the SVG so it
+   * composites over any background colour without a wrapper
+   * element or a blend mode.                                        */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* ==================================================================
+   PHONE SCALE
+   Tighter padding/margin/gap and a smaller type scale below 768px.
+   Sizes (--size-*) are untouched, so tap targets keep their height.
+   ================================================================== */
+@media (max-width: 767px) {
+  :root {
+    --space-1: 6px;
+    --space-2: 12px;
+    --space-3: 16px;
+    --space-4: 20px;
+    --space-6: 28px;
+    --space-8: 32px;
+    --space-12: 44px;
+    --space-16: 56px;
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 0.9375rem;
+    --text-lg: 1rem;
+    --text-xl: 1.125rem;
+    --text-2xl: 1.25rem;
+    --text-3xl: 1.4rem;
+    --text-4xl: 1.65rem;
+    --text-5xl: 1.85rem;
+    --text-6xl: 2rem;
+  }
+}
+
+/* Mobile keeps the same 8px scale but tightens the page gutter. */
+@media (max-width: 767px) {
+  :root {
+    --grid-gutter: var(--space-2);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Touch: no 300ms double-tap delay, no grey flash on tap, and the page
+   never scrolls sideways because one element got wide. */
+a,
+button,
+summary,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+.balance {
+  text-wrap: balance;
+}
+
+/* ==================================================================
+   REVEAL
+   The one scroll-entrance system in the product (see Reveal.tsx). A
+   base state plus four stagger steps — nothing else animates an
+   entrance on its own.
+   ================================================================== */
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-init[data-reveal-delay="1"] {
+  transition-delay: 90ms;
+}
+.reveal-init[data-reveal-delay="2"] {
+  transition-delay: 180ms;
+}
+.reveal-init[data-reveal-delay="3"] {
+  transition-delay: 270ms;
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==================================================================
+   TEXTURE
+   Flat single-colour fills are the loudest remaining machine-made
+   signal. Large surfaces carry a grain that shouldn't be nameable at
+   a glance — only felt.
+   ================================================================== */
+
+.textured {
+  background-image: var(--noise);
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* A surface that already has a photograph or gradient keeps the noise
+   above the fill but below the content. */
+.textured-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--noise);
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  pointer-events: none;
+}
+
+/* ==================================================================
+   PLATE
+   Hard, square, offset — the graphic counterpoint to the soft
+   textured sections. One or two per page, never more.
+   ================================================================== */
+
+.plate {
+  border: 1px solid var(--plate-line, currentColor);
+  border-radius: 0;
+  box-shadow: var(--offset-hard) var(--offset-hard) 0 var(--plate-line, currentColor);
+}
+
+.plate-ink {
+  --plate-line: #181511;
+}
+.plate-navy {
+  --plate-line: #0F2A44;
+}
+.plate-brass {
+  --plate-line: #C7A24A;
+}
+.plate-gold {
+  --plate-line: #A9885A;
+}
+.plate-paper {
+  --plate-line: #FFFFFF;
+}
+
+/* ==================================================================
+   GRID
+   One container width per page. Sections vary their composition,
+   never their column boundaries.
+   ================================================================== */
+
+.container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: var(--container-max);
+  padding-inline: var(--grid-gutter);
+}
+
+.grid-page {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+}
+
+/* ==================================================================
+   RAILS
+   Horizontal scrollers align their first card to the page's own
+   column boundary instead of the viewport edge.
+   ================================================================== */
+
+.rail {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: var(--grid-gutter);
+  scroll-padding-inline: var(--grid-gutter);
+  padding-inline: var(--grid-gutter);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rail > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .rail {
+    scroll-padding-inline: max(
+      var(--grid-gutter),
+      calc((100vw - var(--container-max)) / 2 + var(--grid-gutter))
+    );
+    padding-inline: max(
+      var(--grid-gutter),
+      calc((100vw - var(--container-max)) / 2 + var(--grid-gutter))
+    );
+  }
+}
+
+.rail-card {
+  width: var(--rail-card-sm);
+}
+
+@media (min-width: 768px) {
+  .rail-card {
+    width: var(--rail-card);
+  }
+}
+
+/* ==================================================================
+   RAIL FIELD
+   A faint drifting starfield behind a rail — barely perceptible, felt
+   rather than named. `currentColor` means the same rule reads correctly
+   as pale dust on a dark rail and dark grain on a light one.
+   ================================================================== */
+
+.rail-field {
+  position: relative;
+  isolation: isolate;
+}
+
+.rail-field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+      1px 1px at 10% 22%,
+      currentColor 45%,
+      transparent 46%
+    ),
+    radial-gradient(1px 1px at 78% 64%, currentColor 45%, transparent 46%),
+    radial-gradient(1.5px 1.5px at 42% 82%, currentColor 40%, transparent 46%),
+    radial-gradient(1px 1px at 62% 28%, currentColor 40%, transparent 46%),
+    radial-gradient(1.5px 1.5px at 24% 52%, currentColor 35%, transparent 46%),
+    radial-gradient(1px 1px at 92% 14%, currentColor 40%, transparent 46%),
+    radial-gradient(1px 1px at 34% 8%, currentColor 35%, transparent 46%);
+  background-repeat: repeat;
+  background-size: 320px 320px;
+  opacity: 0.07;
+  animation: rail-drift 50s linear infinite;
+}
+
+.rail-field > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes rail-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 320px 320px;
+  }
+}
+
+/* ==================================================================
+   PER-BRAND COLOUR GRADES
+   Grading every frame on a page through one curve is what makes a
+   mixed set of photographs read as a single shoot.
+   ================================================================== */
+
+.grade-ember {
+  filter: saturate(0.82) contrast(1.08) brightness(0.9) sepia(0.16);
+}
+
+.grade-aurelia {
+  filter: saturate(0.86) contrast(1.02) brightness(1.03) sepia(0.07);
+}
+
+.grade-maison {
+  filter: grayscale(1) contrast(1.07) brightness(1.02);
+}
+
+.grade-northline {
+  filter: saturate(0.92) contrast(1.05) brightness(1.02);
+}
+
+.grade-retail {
+  filter: saturate(0.94) contrast(1.06) brightness(1.03);
+}
+
+.grade-realestate {
+  filter: saturate(0.9) contrast(1.04) brightness(1.02);
+}
+
+.grade-fitness {
+  filter: saturate(1.15) contrast(1.15) brightness(0.9);
+}
+
+.grade-clinic {
+  filter: saturate(0.85) contrast(1.02) brightness(1.04);
+}
+
+.grade-photo {
+  filter: saturate(0.88) contrast(1.05) brightness(1.01);
+}
+
+.grade-travel {
+  filter: saturate(1.1) contrast(1.04) brightness(1.03) sepia(0.06);
+}
+
+.grade-auto {
+  filter: saturate(0.96) contrast(1.1) brightness(1);
+}
+
+.grade-wedding {
+  filter: saturate(0.9) contrast(0.98) brightness(1.05);
+}
+
+.grade-education {
+  filter: saturate(0.92) contrast(1.03) brightness(1.02);
+}
+
+.grade-construction {
+  filter: saturate(0.85) contrast(1.1) brightness(0.98);
+}
+
+/* ==================================================================
+   DISCLOSURE
+   Native <details>/<summary> accordion used for FAQ-style content —
+   no JS state needed. The marker rotates instead of swapping icons.
+   ================================================================== */
+
+.disclosure > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure-marker {
+  transition: transform 0.25s ease;
+}
+
+.disclosure[open] .disclosure-marker {
+  transform: rotate(45deg);
+}
+
+
+/* ==================================================================
+   MOBILE COMPOSITION
+   Desktop layouts are grids. On a phone the same content is recomposed
+   rather than shrunk: sets of cards become swipeable rails that peek
+   the next card, and ratio-locked frames can change shape.
+   ================================================================== */
+
+/* Swipeable rail below 768px, untouched above it. Children keep their
+   own desktop grid/flex classes, which take over at md. */
+@media (max-width: 767px) {
+  .snap-mobile {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-2);
+    margin-inline: calc(var(--grid-gutter) * -1);
+    padding-inline: var(--grid-gutter);
+    scroll-padding-inline: var(--grid-gutter);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .snap-mobile::-webkit-scrollbar {
+    display: none;
+  }
+  .snap-mobile > * {
+    flex: 0 0 var(--snap-card, 60vw);
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+  .snap-mobile--wide {
+    --snap-card: 70vw;
+  }
+  .snap-mobile--narrow {
+    --snap-card: 52vw;
+  }
+}
+
+/* A Frame whose aspect ratio differs between phone and desktop. */
+.frame-responsive {
+  aspect-ratio: var(--r-sm);
+}
+@media (min-width: 768px) {
+  .frame-responsive {
+    aspect-ratio: var(--r);
+  }
+}
+
+/* The hard-offset plate, desktop only. Below 768px the same block is a
+   flat hairline-ruled item so a stack of them doesn't read as a stack
+   of boxes with clipped shadows. */
+@media (min-width: 768px) {
+  .plate-md {
+    border: 1px solid var(--plate-line, currentColor);
+    border-radius: 0;
+    box-shadow: var(--offset-hard) var(--offset-hard) 0
+      var(--plate-line, currentColor);
+  }
+}
+
+/* Fixed bottom bars clear the iOS home indicator. */
+.safe-bottom {
+  padding-bottom: var(--safe-bottom);
+}
+
+/* A fixed corner element (not a full-width bar) offset above the same
+   safe area, on top of its own normal spacing. */
+.safe-bottom-offset {
+  bottom: calc(var(--space-3) + var(--safe-bottom));
+}
+
+/* Extra bottom padding for a bar pinned flush to the screen edge, so its
+   content clears the home-indicator / gesture area on notched phones. */
+.safe-bottom-pad {
+  padding-bottom: calc(var(--space-3) + var(--safe-bottom));
+}
+
+/* Vertical timeline rule that runs behind numbered circles. */
+.timeline-rule::before {
+  content: "";
+  position: absolute;
+  left: var(--space-2);
+  top: var(--space-2);
+  bottom: var(--space-2);
+  width: 1px;
+  background: currentColor;
+  opacity: 0.2;
+}
+@media (min-width: 768px) {
+  .timeline-rule::before {
+    display: none;
+  }
+}
+
+/* Drawing-sheet grid paper (construction demo hero). */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgb(0 0 0 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.06) 1px, transparent 1px);
+  background-size: var(--space-6) var(--space-6);
+}
+
+
+/* ---- Motion: all of it is switched off by the prefers-reduced-motion rule above ---- */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.fade-up-2 { animation-delay: 0.15s; }
+.fade-up-3 { animation-delay: 0.3s; }
+.zoom img { transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1); will-change: transform; }
+.zoom:hover img, .zoom:focus-visible img { transform: scale(1.06); }
+
+
+/* Skip link: first tab stop on every route, visible only when focused. */
+.skip-link {
+  position: absolute;
+  left: var(--space-1);
+  top: calc(var(--space-8) * -1);
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  text-decoration: none;
+  border-radius: 4px;
+}
+.skip-link:focus {
+  top: var(--space-1);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+
+/* Dropdown lists are drawn by the browser; give them a readable surface even
+   when the select itself is styled light-on-dark. */
+select option {
+  background-color: #fff;
+  color: #111;
+}
+
+/* ==================================================================
+   MOBILE FORM CONTROLS
+   iOS Safari zooms the page when a focused field is under the base
+   text size. Every field on every page stays at base size on phones.
+   ================================================================== */
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: var(--text-input) !important;
+  }
+}
+
+/* ==================================================================
+   NAVIGATION PROGRESS BAR (see components/NavigationProgress.tsx)
+   ================================================================== */
+.nav-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+.nav-progress[data-state="idle"] { width: 0; opacity: 0; transition: none; }
+.nav-progress[data-state="loading"] { width: 85%; opacity: 1; transition: width 8s cubic-bezier(0.1, 0.7, 0.2, 1); }
+.nav-progress[data-state="done"] { width: 100%; opacity: 0; transition: width 0.2s ease-out, opacity 0.3s ease 0.2s; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-progress { transition: none !important; }
+}

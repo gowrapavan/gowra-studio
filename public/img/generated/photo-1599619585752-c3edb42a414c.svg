@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(125,55%,30%)"/>
+      <stop offset="100%" stop-color="hsl(325,45%,20%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <polygon points="456,204 272,66 88,1128" fill="hsl(125,50%,40%)" opacity="0.45"/><polygon points="272,66 88,1128 1504,990" fill="hsl(150,50%,40%)" opacity="0.45"/><polygon points="88,1128 1504,990 1320,852" fill="hsl(175,50%,40%)" opacity="0.45"/><polygon points="1504,990 1320,852 1136,714" fill="hsl(200,50%,40%)" opacity="0.45"/><polygon points="1320,852 1136,714 456,204" fill="hsl(225,50%,40%)" opacity="0.45"/><polygon points="1136,714 456,204 272,66" fill="hsl(250,50%,40%)" opacity="0.45"/><polygon points="456,204 272,66 88,1128" fill="hsl(275,50%,40%)" opacity="0.45"/><polygon points="272,66 88,1128 1504,990" fill="hsl(300,50%,40%)" opacity="0.45"/><polygon points="88,1128 1504,990 1320,852" fill="hsl(325,50%,40%)" opacity="0.45"/><polygon points="1504,990 1320,852 1136,714" fill="hsl(350,50%,40%)" opacity="0.45"/>
+</svg>

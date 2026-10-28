@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(24,55%,30%)"/>
+      <stop offset="100%" stop-color="hsl(224,45%,20%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect x="1510" y="-200" width="154" height="1600" fill="hsl(24,50%,54.16%)" opacity="0.5" transform="rotate(20 1510 600)"/><rect x="525" y="-200" width="80" height="1600" fill="hsl(44,50%,44.92%)" opacity="0.5" transform="rotate(20 525 600)"/><rect x="1139" y="-200" width="126" height="1600" fill="hsl(64,50%,50.68%)" opacity="0.5" transform="rotate(20 1139 600)"/><rect x="154" y="-200" width="172" height="1600" fill="hsl(84,50%,41.44%)" opacity="0.5" transform="rotate(20 154 600)"/><rect x="768" y="-200" width="98" height="1600" fill="hsl(104,50%,47.2%)" opacity="0.5" transform="rotate(20 768 600)"/><rect x="1382" y="-200" width="144" height="1600" fill="hsl(124,50%,52.96%)" opacity="0.5" transform="rotate(20 1382 600)"/>
+</svg>
