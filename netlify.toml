@@ -9,4 +9,4 @@
   # These three are PUBLIC by design (they appear on the website for visitors),
   # so Netlify's secrets scan must not treat them as secrets. Real secrets such
   # as RESEND_API_KEY stay protected by the scan.
-  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_WHATSAPP_NUMBER,NEXT_PUBLIC_COMPANY_NAME,NEXT_PUBLIC_CONTACT_EMAIL"
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_WHATSAPP_NUMBER,NEXT_PUBLIC_COMPANY_NAME,NEXT_PUBLIC_CONTACT_EMAIL,LEAD_TO_EMAIL"
