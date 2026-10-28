@@ -176,4 +176,5 @@ site and verify with the meta tag in `BING_SITE_VERIFICATION`. Submit `sitemap.x
 | A variable change has no effect | Variables apply at build time: trigger a new deploy |
 | `git push` rejected | The GitHub repo was not empty; recreate it empty |
 | Build fails with "has no exported member" or a file you do not recognise | A leftover file from an older version is still in your repo. v27 deletes the known one automatically during build. To be safe, replace the whole `src` folder with the one from the zip (keep `.git`), then commit and push |
+| Build fails with "Secrets scanning found secrets" | Public values (`NEXT_PUBLIC_*`) are listed in `netlify.toml` as safe under `SECRETS_SCAN_OMIT_KEYS`. If you add another public variable, add its name there too. Never do this for `RESEND_API_KEY` |
 | Build fails on Netlify | Open the deploy log and send me the last 30 lines (without any keys) |
