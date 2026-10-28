@@ -15,7 +15,7 @@
     "audit:design": "node scripts/audit-design.mjs",
     "vendor:fonts": "node scripts/vendor-fonts.mjs",
     "audit:mobile": "node scripts/mobile-audit.mjs",
-    "prebuild": "node scripts/check-seo-env.mjs",
+    "prebuild": "node scripts/clean-stale.mjs && node scripts/check-seo-env.mjs",
     "check:seo": "node scripts/check-seo-env.mjs"
   },
   "dependencies": {

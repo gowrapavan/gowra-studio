@@ -6,4 +6,3 @@ node_modules
 tsconfig.tsbuildinfo
 *.log
 audit-shots
-.env.example
